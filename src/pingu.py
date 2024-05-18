@@ -8,6 +8,6 @@ class Pingu:
 		self.imgs = [images.sprite_pingu1, images.sprite_pingu2]
 	
 	def draw(self):
-		img = self.imgs[self.animationframe]
-		self.animationframe = (self.animationframe + 1) % len(self.imgs)
+		img = self.imgs[int(self.animationframe)]
+		self.animationframe = (self.animationframe + 0.1) % len(self.imgs)
 		return img

@@ -47,3 +47,8 @@ class Images:
         image_portion = img.subsurface(portion_rect).copy()
         
         return image_portion
+    
+    def rot_center(image, angle):
+        rotated_image = pg.transform.rotate(image, angle)
+        # new_rect = rotated_image.get_rect(center = image.get_rect(center = (x, y)).center)
+        return rotated_image

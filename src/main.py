@@ -23,6 +23,9 @@ def main():
     
     view = View(screen, images)
     tiles = Terrain.test(images)
+    tiles[2][1].rotate(False)
+    tiles[2][1].rotate(False)
+    tiles[1][1].rotate(False)
 
     clock = pg.time.Clock()
     is_running = True

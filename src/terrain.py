@@ -1,7 +1,7 @@
 import math
 from enum import IntEnum
 from img import Images
-from direction import PathType
+from pathtype import PathType
 
 DIRNBR = 4
 
@@ -83,10 +83,12 @@ class Terrain:
     def __init__(self, tiles):
         self.tiles = tiles
     
-    def from_pathtypes(pathtypes, images):
+    def from_pathtypes(pathtypes, rotation_tiles, images):
         tiles = [[None for j in range(len(pathtypes[i]))] for i in range(len(pathtypes))]
         for i in range(len(pathtypes)):
             for j in range(len(pathtypes[i])):
+                for k in range(rotation_tiles[i][j]):
+                    images.rotate(True)
                 tiles[i][j] = Tile(pathtypes[i][j], images)
         return tiles
     

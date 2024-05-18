@@ -6,9 +6,11 @@ class View:
     def __init__(self, screen, images):
         self.screen = screen
         self.images = images
+
+    def scale_sprites(self, image, scale):
+        return pg.transform.scale_by(image,(scale,scale))
     
-    def draw(self, tiles, scale, pingu):
-        
+    def draw(self, tiles, scale, pingu):        
         plateau = pg.Surface((780, 580))
         tilewidth = 32
         tileheigth = 32
@@ -18,13 +20,11 @@ class View:
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
                 
-        # if scale == 2:
-        #     plateau = pg.transform.scale2x(plateau)
-        # elif scale == 3:
-        plateau = pg.transform.scale_by(plateau,(scale,scale))
+        plateau = self.scale_sprites(plateau, scale)
         self.screen.blit(plateau, (10, 10))
         
-        self.screen.blit(pingu.draw(), (10, 10))
+        pingu = self.scale_sprites(pingu.draw(), scale)
+        self.screen.blit(pingu, (10, 10))
         
         pg.display.flip()
         

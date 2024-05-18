@@ -87,9 +87,8 @@ class Terrain:
         tiles = [[None for j in range(len(pathtypes[i]))] for i in range(len(pathtypes))]
         for i in range(len(pathtypes)):
             for j in range(len(pathtypes[i])):
-                # for k in range(rotation_tiles[i][j]):
-                #     images.rotate(True)
                 tiles[i][j] = Tile(pathtypes[i][j], images)
+                tiles[i][j].set_rotation(rotation_tiles[i][j])
         return tiles
     
     def test(images):
@@ -105,4 +104,10 @@ class Terrain:
                [L, I, L], 
                [O, O, X]]
         map = [[map[j][i] for j in range(len(map[i]))] for i in range(len(map))]
-        return Terrain.from_pathtypes(map, None, images)
+
+        rotation_map = [[0, 0, 0],
+                        [0, 1, 3],
+                        [0, 0, 0]]
+        rotation_map = [[rotation_map[j][i] for j in range(len(rotation_map[i]))] for i in range(len(rotation_map))]
+
+        return Terrain.from_pathtypes(map, rotation_map, images)

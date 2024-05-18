@@ -13,7 +13,7 @@ class Level:
     def __init__(self):
         pass
 
-    def niveau_1(images):
+    def level_1(images):
         map = [[O, O, O, O, O],
                [O, O, O, O, O],
                [I, I, I, I, I],

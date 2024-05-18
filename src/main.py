@@ -2,7 +2,7 @@ import pygame as pg
 from view import *
 from terrain import *
 from img import *
-from pingu import *
+from pingu import Pingu
 from level import Level
 # import pygame_gui as pg_gui
 
@@ -11,7 +11,7 @@ def is_click_inside_zone(click_pos, zone_rect, scale):
         rect_x, rect_y, rect_width, rect_height = zone_rect
         return rect_x <= x <= rect_x + rect_width*scale and rect_y <= y <= rect_y + rect_height*scale
 
-scale = 5
+scale = 4
 
 def main():
     pg.init()
@@ -24,8 +24,11 @@ def main():
     pingu = Pingu(0, 0, images)
     
     view = View(screen, images)
-    tiles = Terrain.test(images)
-    # tiles = Level.niveau_1(images)
+
+    # Level selection
+    # tiles = Terrain.test(images)
+    tiles = Level.level_1(images)
+
     tiles[2][1].rotate(False)
     # tiles[2][1].rotate(False)
     # tiles[1][1].rotate(False)

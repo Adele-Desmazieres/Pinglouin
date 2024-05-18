@@ -18,10 +18,11 @@ class Dir(Enum): # directions
 
 class Tile:
     
-    def __init__(self, pathtype):
+    def __init__(self, pathtype, images):
         self.pathtype = pathtype
         self.connections = [] # list of list of Dirs
-        self.img = Images.get_tile_img(self.pathtype)
+        self.img = images.get_tile_img(self.pathtype)
+        # self.img = pg.image.load("sand2.png")
         self.rot = 0 # rotation
         match pathtype:
             case PathType.O:
@@ -47,6 +48,8 @@ class Tile:
         return self.connections
         
     def draw(self):
+        # print("THERE ")
+        # print(self.img)
         return self.img
 
 
@@ -56,9 +59,23 @@ class Terrain:
     def __init__(self, tiles):
         self.tiles = tiles
     
-    def from_pathtypes(pathtypes):
+    def from_pathtypes(pathtypes, images):
         tiles = [[None for j in range(len(pathtypes[i]))] for i in range(len(pathtypes))]
-        for i in range(pathtypes):
-            for j in range(pathtypes[i]):
-                tiles[i][j] = Tile(pathtypes[i][j])
+        for i in range(len(pathtypes)):
+            for j in range(len(pathtypes[i])):
+                tiles[i][j] = Tile(pathtypes[i][j], images)
         return tiles
+    
+    def test(images):
+        O = PathType.O
+        I = PathType.I
+        L = PathType.L
+        T = PathType.T
+        X = PathType.X
+        P = PathType.P
+        H = PathType.H
+        
+        map = [[X, O, O], 
+               [L, I, L], 
+               [O, O, X]]
+        return Terrain.from_pathtypes(map, images)

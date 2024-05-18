@@ -1,4 +1,7 @@
 import pygame as pg
+from view import *
+from terrain import *
+from img import *
 # import pygame_gui as pg_gui
 
 
@@ -9,6 +12,11 @@ def main():
     pg.display.set_caption("Pinglouin")
     screen.fill((0, 100, 100))
     pg.display.flip()
+    
+    images = Images()
+    
+    view = View(screen, images)
+    tiles = Terrain.test(images)
 
     clock = pg.time.Clock()
     is_running = True
@@ -21,6 +29,9 @@ def main():
         for event in events:
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
                 is_running = False
+            
+            view.draw(tiles)
+            
     
 
 

@@ -9,7 +9,7 @@ def is_click_inside_zone(click_pos, zone_rect, scale):
         rect_x, rect_y, rect_width, rect_height = zone_rect
         return rect_x <= x <= rect_x + rect_width*scale and rect_y <= y <= rect_y + rect_height*scale
 
-scale = 3
+scale = 2
 
 def main():
     print("Hello World")
@@ -40,10 +40,14 @@ def main():
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
                 is_running = False
             elif event.type == pg.MOUSEBUTTONDOWN:
-                if is_click_inside_zone(event.pos, (0, 0, 32, 32), scale):
-                    print("Clicked inside the zone!")
-                else:
-                    print("Clicked outside the zone.")
+                x = math.floor((event.pos[0]/scale))
+                y = math.floor((event.pos[1]/scale))
+                try:
+                    if is_click_inside_zone(event.pos, (x, y, x*32, y*32), scale):
+                        tiles[math.floor(x/32)][math.floor(y/32)].rotate()
+                        print("On rotate !")                        
+                except Exception:
+                    print("Pas dans la zone.")
             
         view.draw(tiles, scale)
         

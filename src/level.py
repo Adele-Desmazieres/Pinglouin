@@ -1,5 +1,7 @@
 from pathtype import PathType
 from terrain import Terrain
+from pingu import Pingu
+from water import Water
 
 O = PathType.O
 I = PathType.I
@@ -9,7 +11,31 @@ X = PathType.X
 P = PathType.P
 H = PathType.H
 
+class LevelManager:
+    
+    def __init__(self, images):
+        self.levels = [Level(), Level(), Level()]
+        self.levels[0].level_1(images)
+        self.levels[1].level_2(images)
+        self.levels[2].level_3(images)
+        self.curr_level = 0
+    
+    def next_level(self):
+        self.curr_level += 1
+        if (self.curr_level) >= len(self.levels):
+            print("VICTOIRE !")
+            self.curr_level = 0
+    
+    def get_curr_level(self):
+        return self.levels[self.curr_level]
+    
+    def get_tiles(self, images):
+        lvl = self.get_curr_level()
+        return Terrain.from_pathtypes(lvl.map, lvl.rotation_map, images)
+
+
 class Level:
+    
     def __init__(self):
         self.map = None
         self.rotation_map = None
@@ -79,3 +105,9 @@ class Level:
         self.rotation_map = Terrain.transpose_arr(self.rotation_map)
 
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
+    
+    def get_pingu(self, images):
+        return Pingu(self.start[0], self.start[1], images)
+    
+    def get_water(self, images):
+        return Water(self.end[0], self.end[1], images)

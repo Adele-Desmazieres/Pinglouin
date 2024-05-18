@@ -1,9 +1,9 @@
 import pygame as pg
 from view import *
 from terrain import *
-from img import *
+from img import Images
 from pingu import Pingu
-from level import Level
+from level import Level, LevelManager
 import pathfinding
 # import pygame_gui as pg_gui
 
@@ -23,16 +23,16 @@ def main():
     pg.display.flip()
     
     images = Images()
-    level = Level()
-    # pingu = Pingu(0, 0, images)
     
     view = View(screen, images)
 
     # Level selection
-    # tiles = Terrain.test(images)
-    tiles = level.level_1(images)
-    pingu = Pingu(level.start[0], level.start[1], images)
-    water = Water(level.end[0], level.end[1], images)
+    lvls = LevelManager(images)
+    # tiles = level.level_1(images)
+    tiles = lvls.get_tiles(images)
+    lvl = lvls.get_curr_level()
+    pingu = lvl.get_pingu(images)
+    water = lvl.get_water(images)
 
     clock = pg.time.Clock()
     is_running = True
@@ -61,9 +61,16 @@ def main():
     
             if rotated:
                 # test du pathfinding
-                haspath = pathfinding.has_shortest_path(tiles, level.start, level.end)
+                haspath = pathfinding.has_shortest_path(tiles, lvl.start, lvl.end)
                 if (haspath):
                     print("PATH FOUND")
+                    lvls.next_level()
+                    tiles = lvls.get_tiles(images)
+                    lvl = lvls.get_curr_level()
+                    pingu = lvl.get_pingu(images)
+                    water = lvl.get_water(images)
+
+                    
 
         view.draw(tiles, scale, pingu, water)
         

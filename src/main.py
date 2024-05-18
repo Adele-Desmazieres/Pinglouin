@@ -19,7 +19,7 @@ def main():
     pg.init()
     screen = pg.display.set_mode((800, 600))
     pg.display.set_caption("Pinglouin")
-    screen.fill((0, 100, 100))
+    screen.fill((176, 117, 78))
     pg.display.flip()
     
     images = Images()

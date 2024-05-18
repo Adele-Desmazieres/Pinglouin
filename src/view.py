@@ -14,6 +14,7 @@ class View:
     
     def draw(self, tiles, scale, pingu, water):        
         plateau = pg.Surface((780, 580))
+        plateau.fill((176, 117, 78))
         tilewidth = 32
         tileheigth = 32
         tilespace = 1
@@ -26,6 +27,6 @@ class View:
         plateau.blit(water.img, (water.x*(32+tilespace), water.y*(32+tilespace)))
         
         plateau = self.scale_sprites(plateau, scale)
-        self.screen.blit(plateau, (10, 10))
+        self.screen.blit(plateau, (0, 0))
         pg.display.flip()
         

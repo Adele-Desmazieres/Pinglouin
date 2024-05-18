@@ -1,15 +1,6 @@
 from enum import Enum
 from img import Images
-
-class PathType(Enum):
-    O = 0 # pas de chemin
-    I = 1
-    L = 2
-    T = 3
-    X = 4 # croisement
-    P = 5 # pont N-S et E-W
-    H = 6 # pont N-W et S-E
-
+from direction import PathType
 
 class Dir(Enum): # directions
     nbr = 4

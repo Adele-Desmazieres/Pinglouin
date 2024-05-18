@@ -35,21 +35,23 @@ def get_shortest_path(arr, start, end) :
     # queue
     final_path = []
     
-    # insert the end tile in first    
     path_values[end[0]][end[1]] = 0
+    number_loop = len(arr)*len(arr[0])
 
-    for i in range(len(arr)):
-        for j in range(len(arr[0])):
-            if arr[i][j] != 0:
-                value = path_values[i][j] + 1
-                if check_connections_left_right(arr[i][j], arr[i][j+1]):                    
-                    if path_values[i][j+1] > value:
-                        path_values[i][j+1] = value
-                if check_connections_up_down(arr[i][j], arr[i+1][j]):
-                    if path_values[i+1][j] > value:
-                        path_values[i+1][j] = value
-            else:
-                path_values[i][j] = -1
+    while path_values[start[0]][start[1]] == -1 and number_loop > 0:
+        for i in range(len(arr)-1):
+            for j in range(len(arr[0])-1):
+                if arr[i][j] != 0:
+                    value = path_values[i][j] + 1
+                    if check_connections_left_right(arr[i][j], arr[i][j+1]):                    
+                        if path_values[i][j+1] > value:
+                            path_values[i][j+1] = value
+                    if check_connections_up_down(arr[i][j], arr[i+1][j]):
+                        if path_values[i+1][j] > value:
+                            path_values[i+1][j] = value
+                else:
+                    path_values[i][j] = -1
+        number_loop -= 1
     
     final_path.append(start)
     last_value = path_values[start[0]][start[1]]
@@ -61,14 +63,14 @@ def get_shortest_path(arr, start, end) :
     return final_path
 
 # Given array
-arr =  [[ 4, 4, 4, 4, 4 ],
-        [ 0, 0, 0, 0, 4 ],
-        [ 0, 0, 0, 0, 4 ],
-        [ 0, 0, 0, 0, 4 ],
-        [ 0, 0, 0, 0, 4 ]]
+# arr =  [[ 4, 4, 4, 4, 4 ],
+#         [ 0, 0, 0, 0, 4 ],
+#         [ 0, 0, 0, 0, 4 ],
+#         [ 0, 0, 0, 0, 4 ],
+#         [ 0, 0, 0, 0, 4 ]]
 
-# path from arr[0][0] to arr[row][col]
-# print(get_shortest_path(arr, (0, 0), (row-1, col-1)))
+# # path from arr[0][0] to arr[row][col]
+# # print(get_shortest_path(arr, (0, 0), (row-1, col-1)))
 
-print(check_connections_left_right(Tile(PathType.I), Tile(PathType.X)))
+# print(check_connections_left_right(Tile(PathType.I), Tile(PathType.X)))
 

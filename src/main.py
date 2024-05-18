@@ -4,6 +4,7 @@ from terrain import *
 from img import *
 from pingu import Pingu
 from level import Level
+import pathfinding
 # import pygame_gui as pg_gui
 
 # Parameters
@@ -29,12 +30,15 @@ def main():
 
     # Level selection
     # tiles = Terrain.test(images)
-    tiles = level.level_1(images)
+    tiles = level.level_3(images)
     pingu = Pingu(level.start[0], level.start[1], images)
     water = Water(level.end[0], level.end[1], images)
 
     clock = pg.time.Clock()
     is_running = True
+
+    # test du pathfinding
+    path = pathfinding.get_shortest_path(tiles, level.start, level.end)
 
     while is_running:
         time_delta = clock.tick(60) / 1000.0

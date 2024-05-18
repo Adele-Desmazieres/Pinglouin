@@ -29,8 +29,10 @@ class View:
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
         
-        plateau.blit(pingu.draw(), (pingu.x*(32+tilespace), pingu.y*(32+tilespace)-8))
-        plateau.blit(water.img, (water.x*(32+tilespace), water.y*(32+tilespace)))
+        if not win:
+            plateau.blit(pingu.draw(), (pingu.x*(32+tilespace), pingu.y*(32+tilespace)-8))
+            
+        plateau.blit(water.draw(win), (water.x*(32+tilespace), water.y*(32+tilespace)))
         
         plateau = self.scale_sprites(plateau, scale)
         self.screen.blit(plateau, (0, 0))

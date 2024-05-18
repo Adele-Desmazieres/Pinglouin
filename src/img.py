@@ -15,7 +15,7 @@ class Images:
     def __init__(self):
         self.sprite_broken = pg.image.load("../img/broken.png")
         self.sprite_tiles  = pg.image.load("../img/sprites.png")
-        columns = 3
+        columns = 4
         
         self.sprite_O = Images.get_sprite_at(self.sprite_tiles, 0, columns)
         self.sprite_I = Images.get_sprite_at(self.sprite_tiles, 1, columns)
@@ -29,6 +29,8 @@ class Images:
         self.sprite_pingu2 = Images.get_sprite_at(self.sprite_tiles, 9, columns)
 
         self.sprite_water = Images.get_sprite_at(self.sprite_tiles, 11, columns)
+        self.sprite_water_win1 = Images.get_sprite_at(self.sprite_tiles, 12, columns)
+        self.sprite_water_win2 = Images.get_sprite_at(self.sprite_tiles, 13, columns)
     
     def get_tile_img(self, pathtype):
         

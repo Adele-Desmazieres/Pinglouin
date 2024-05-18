@@ -30,33 +30,41 @@ def main():
 
     # Level selection
     # tiles = Terrain.test(images)
-    tiles = level.level_3(images)
+    tiles = level.level_1(images)
     pingu = Pingu(level.start[0], level.start[1], images)
     water = Water(level.end[0], level.end[1], images)
 
     clock = pg.time.Clock()
     is_running = True
-
-    # test du pathfinding
-    path = pathfinding.get_shortest_path(tiles, level.start, level.end)
-
     while is_running:
+        rotated = False
         time_delta = clock.tick(60) / 1000.0
         
         events = pg.event.get()
         pressed = pg.key.get_pressed()
         
         for event in events:
+            
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
                 is_running = False
+                
             elif event.type == pg.MOUSEBUTTONDOWN:
                 x = math.floor((event.pos[0]/scale))
                 y = math.floor((event.pos[1]/scale))
+                
                 try:
                     if is_click_inside_zone(event.pos, (x, y, x*32, y*32), scale):
                         tiles[math.floor(x/32)][math.floor(y/32)].rotate()
-                except Exception:
+                        rotated = True
+                except IndexError:
                     pass
+    
+            if rotated:
+                # test du pathfinding
+                haspath = pathfinding.has_shortest_path(tiles, level.start, level.end)
+                if (haspath):
+                    print("PATH FOUND")
+
         view.draw(tiles, scale, pingu, water)
         
     

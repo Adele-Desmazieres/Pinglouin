@@ -24,43 +24,72 @@ def check_connections_left_right(tile_left, tile_right):
         if Dir.WEST in tile_right.connections[i]:
             tile_right_ok = True
     return tile_right_ok and tile_left_ok
-    
 
-# to find the path from
-# top left to bottom right
-def get_shortest_path(arr, start, end) :
+
+def print_matrix(m):
+    print("[")
+    for i in range(len(m)):
+        print(m[i])
+    print("]")
+
+# returns a boolean, true if a path is found from begin to end
+def has_shortest_path(tiles, start, end) :
+    h = len(tiles)
+    w = len(tiles[0])
+    
+    max = w * h + 1
+    
+    
     # the values for our future path are at -1
-    path_values = [[-1]*len(arr)]*len(arr[0])
-    
-    # queue
-    final_path = []
-    
+    path_values = [[max for x in range(h)] for y in range(w)]
+    # init with 0 at the end
     path_values[end[0]][end[1]] = 0
-    number_loop = len(arr)*len(arr[0])
+    # print_matrix(path_values)
+    path_values = [[max] * w] + path_values + [[max] * w]
+    # print_matrix(path_values)
+    path_values = [[max] + x + [max] for x in path_values]
+    # print_matrix(path_values)
+    # print(path_values)
+    
+    
+    # chemin
+    # final_path = []
+    number_loop = h * w
 
-    while path_values[start[0]][start[1]] == -1 and number_loop > 0:
-        for i in range(len(arr)-1):
-            for j in range(len(arr[0])-1):
-                if arr[i][j] != 0:
-                    value = path_values[i][j] + 1
-                    if check_connections_left_right(arr[i][j], arr[i][j+1]):                    
-                        if path_values[i][j+1] > value:
-                            path_values[i][j+1] = value
-                    if check_connections_up_down(arr[i][j], arr[i+1][j]):
-                        if path_values[i+1][j] > value:
-                            path_values[i+1][j] = value
-                else:
-                    path_values[i][j] = -1
+    # évaluer les distances
+    while path_values[start[0]][start[1]] == max and number_loop > 0:
+        
+        for i in range(1, h):
+            for j in range(1, w):
+                
+                tile = tiles[i-1][j-1]
+                v = path_values[i][j]
+                
+                if path_values[i-1][j] != max:
+                    if check_connections_left_right(tiles[i-1-1][j-1], tile):
+                        v = min(v, path_values[i-1][j]+1)
+                
+                if path_values[i+1][j] != max:
+                    if check_connections_left_right(tile, tiles[i+1-1][j-1]):
+                        v = min(v, path_values[i+1][j]+1)
+                
+                if path_values[i][j-1] != max:
+                    if check_connections_up_down(tiles[i-1][j-1-1], tile):
+                        v = min(v, path_values[i][j-1]+1)
+
+                if path_values[i][j+1] != max:
+                    if check_connections_up_down(tiles[i-1][j+1-1], tile):
+                        v = min(v, path_values[i][j+1]+1)
+                
+                path_values[i][j] = v
+        
         number_loop -= 1
     
-    final_path.append(start)
-    last_value = path_values[start[0]][start[1]]
-    while last_value != 0:
-        if path_values[start[0]+1][start[1]] == last_value-1 or path_values[start[0]][start[1]+1] == last_value-1:
-            final_path.append((start[0]+1, start[1]))
-            start = (start[0]+1, start[1])
-
-    return final_path
+    # print_matrix(path_values)
+    path_found = (path_values[start[0]+1][start[1]+1] != max)
+    # print(start[0]+1, start[1]+1)
+    # print(path_found)
+    return path_found
 
 # Given array
 # arr =  [[ 4, 4, 4, 4, 4 ],

@@ -6,12 +6,13 @@ from pingu import Pingu
 from level import Level
 # import pygame_gui as pg_gui
 
+# Parameters
+scale = 3
+
 def is_click_inside_zone(click_pos, zone_rect, scale):
         x, y = click_pos
         rect_x, rect_y, rect_width, rect_height = zone_rect
         return rect_x <= x <= rect_x + rect_width*scale and rect_y <= y <= rect_y + rect_height*scale
-
-scale = 4
 
 def main():
     pg.init()
@@ -21,17 +22,15 @@ def main():
     pg.display.flip()
     
     images = Images()
-    pingu = Pingu(0, 0, images)
+    level = Level()
+    # pingu = Pingu(0, 0, images)
     
     view = View(screen, images)
 
     # Level selection
     # tiles = Terrain.test(images)
-    tiles = Level.level_1(images)
-
-    tiles[2][1].rotate(False)
-    # tiles[2][1].rotate(False)
-    # tiles[1][1].rotate(False)
+    tiles = level.level_1(images)
+    pingu = Pingu(level.start[0], level.start[1], images)
 
     clock = pg.time.Clock()
     is_running = True
@@ -51,10 +50,8 @@ def main():
                 try:
                     if is_click_inside_zone(event.pos, (x, y, x*32, y*32), scale):
                         tiles[math.floor(x/32)][math.floor(y/32)].rotate()
-                        print("On rotate !")                        
                 except Exception:
-                    print("Pas dans la zone.")
-            
+                    pass
         view.draw(tiles, scale, pingu)
         
     

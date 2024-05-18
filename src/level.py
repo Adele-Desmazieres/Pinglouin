@@ -11,21 +11,29 @@ H = PathType.H
 
 class Level:
     def __init__(self):
-        pass
+        self.map = None
+        self.rotation_map = None
 
-    def level_1(images):
-        map = [[O, O, O, O, O],
-               [O, O, O, O, O],
-               [I, I, I, I, I],
-               [O, O, O, O, O],
-               [O, O, O, O, O]]
+        self.start = (0,0)
+        self.end = (1,1)
+
+    def level_1(self, images):
+        self.map = [[O, O, O, O, O],
+                    [O, O, O, O, O],
+                    [I, I, I, I, I],
+                    [O, O, O, O, O],
+                    [O, O, O, O, O]]
         
-        rotation_map = [[0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [1, 1, 0, 1, 1],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0]]
-        map = [[map[j][i] for j in range(len(map[i]))] for i in range(len(map))]
-        rotation_map = [[rotation_map[j][i] for j in range(len(rotation_map[i]))] for i in range(len(rotation_map))]
+        self.rotation_map = [[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [1, 1, 0, 1, 1],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0]]
+        
+        self.start = (0,2)
+        self.end = (4,2)
 
-        return Terrain.from_pathtypes(map, rotation_map, images)
+        self.map = [[self.map[j][i] for j in range(len(self.map[i]))] for i in range(len(self.map))]
+        self.rotation_map = [[self.rotation_map[j][i] for j in range(len(self.rotation_map[i]))] for i in range(len(self.rotation_map))]
+
+        return Terrain.from_pathtypes(self.map, self.rotation_map, images)

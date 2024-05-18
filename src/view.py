@@ -1,6 +1,7 @@
 # la vue
 
 import pygame as pg
+from pingu import Pingu
 
 class View:
     def __init__(self, screen, images):
@@ -20,11 +21,11 @@ class View:
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
                 
+        
+        # pingu_sprite = self.scale_sprites(pingu.draw(), scale)
+        plateau.blit(pingu.draw(), (pingu.x*32, pingu.y*32))
+        
         plateau = self.scale_sprites(plateau, scale)
         self.screen.blit(plateau, (10, 10))
-        
-        pingu = self.scale_sprites(pingu.draw(), scale)
-        self.screen.blit(pingu, (10, 10))
-        
         pg.display.flip()
         

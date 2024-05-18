@@ -39,10 +39,11 @@ def has_shortest_path(tiles, start, end) :
     
     max = w * h + 1
     
-    
     # the values for our future path are at -1
     path_values = [[max for x in range(h)] for y in range(w)]
     # init with 0 at the end
+    # print(end[0], end[1])
+    # print_matrix(path_values)
     path_values[end[0]][end[1]] = 0
     # print_matrix(path_values)
     path_values = [[max] * w] + path_values + [[max] * w]
@@ -78,7 +79,7 @@ def has_shortest_path(tiles, start, end) :
                         v = min(v, path_values[i][j-1]+1)
 
                 if path_values[i][j+1] != max:
-                    if check_connections_up_down(tiles[i-1][j+1-1], tile):
+                    if check_connections_up_down(tile, tiles[i-1][j+1-1]):
                         v = min(v, path_values[i][j+1]+1)
                 
                 path_values[i][j] = v

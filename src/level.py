@@ -14,11 +14,12 @@ H = PathType.H
 class LevelManager:
     
     def __init__(self, images):
-        self.levels = [Level(), Level(), Level()]
+        self.levels = [Level(), Level(), Level(), Level()]
         self.levels[0].level_1(images)
         self.levels[1].level_2(images)
         self.levels[2].level_3(images)
-        self.curr_level = 0
+        self.levels[3].level_4(images)
+        self.curr_level = 1
     
     def next_level(self):
         self.curr_level += 1
@@ -100,6 +101,23 @@ class Level:
         
         self.start = (0,0)
         self.end = (4,3)
+
+        self.map = Terrain.transpose_arr(self.map)
+        self.rotation_map = Terrain.transpose_arr(self.rotation_map)
+
+        return Terrain.from_pathtypes(self.map, self.rotation_map, images)
+    
+    def level_4(self, images):
+        self.map = [[O, X, O],
+                    [O, I, O],
+                    [O, X, O]]
+        
+        self.rotation_map = [[0, 0, 0],
+                             [0, 1, 0],
+                             [0, 0, 0]]
+        
+        self.start = (1,0)
+        self.end = (1,2)
 
         self.map = Terrain.transpose_arr(self.map)
         self.rotation_map = Terrain.transpose_arr(self.rotation_map)

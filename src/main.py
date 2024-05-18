@@ -36,13 +36,20 @@ def main():
 
     clock = pg.time.Clock()
     is_running = True
+
+    victory = False
     while is_running:
         rotated = False
         time_delta = clock.tick(60) / 1000.0
         
         events = pg.event.get()
         pressed = pg.key.get_pressed()
-        
+
+        if victory:
+            view.show_victory_screen()
+            pg.time.wait(2000)
+            victory = False
+
         for event in events:
             
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
@@ -66,7 +73,7 @@ def main():
                     print("PATH FOUND")
                     view.draw(tiles, scale, pingu, water, True)
                     pg.time.wait(1300)
-                    lvls.next_level()
+                    victory = lvls.next_level()
                     tiles = lvls.get_tiles(images)
                     lvl = lvls.get_curr_level()
                     pingu = lvl.get_pingu(images)

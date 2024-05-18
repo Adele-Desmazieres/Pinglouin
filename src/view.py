@@ -35,4 +35,32 @@ class View:
         plateau = self.scale_sprites(plateau, scale)
         self.screen.blit(plateau, (0, 0))
         pg.display.flip()
+
+    # Fonction pour afficher le message de victoire
+    def show_victory_screen(self):
+        # Couleurs
+        white = (255, 255, 255)
+        black = (0, 0, 0)
+        green = (0, 255, 0)
+
+        # Police de caractères
+        font = pg.font.SysFont(None, 75)
+        font2 = pg.font.SysFont(None, 50)
+
+        self.screen.fill((50, 157, 178))
+        victory_text = font.render("Victoire !", True, black)
+        text = font2.render("Appuyez sur une touche pour rejouer", True, black)
+        self.screen.blit(victory_text, (self.screen.get_width() // 4, self.screen.get_height() // 2))
+        self.screen.blit(text, (0, self.screen.get_height() // 2 + 50))
+        pg.display.flip()
+
+        # Attendre que l'utilisateur appuie sur une touche ou ferme la fenêtre
+        waiting = True
+        while waiting:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+
+                if event.type == pg.KEYDOWN or event.type == pg.MOUSEBUTTONDOWN:
+                    waiting = False
         

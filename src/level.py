@@ -26,6 +26,8 @@ class LevelManager:
         if (self.curr_level) >= len(self.levels):
             print("VICTOIRE !")
             self.curr_level = 0
+            return True
+        return False
     
     def get_curr_level(self):
         return self.levels[self.curr_level]

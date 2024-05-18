@@ -33,7 +33,28 @@ class Level:
         self.start = (0,2)
         self.end = (4,2)
 
-        self.map = [[self.map[j][i] for j in range(len(self.map[i]))] for i in range(len(self.map))]
-        self.rotation_map = [[self.rotation_map[j][i] for j in range(len(self.rotation_map[i]))] for i in range(len(self.rotation_map))]
+        self.map = Terrain.transpose_arr(self.map)
+        self.rotation_map = Terrain.transpose_arr(self.rotation_map)
+
+        return Terrain.from_pathtypes(self.map, self.rotation_map, images)
+    
+    def level_2(self, images):
+        self.map = [[O, O, O, O, O],
+                    [O, O, O, O, O],
+                    [I, I, I, I, X],
+                    [O, O, O, O, O],
+                    [O, O, O, O, O]]
+        
+        self.rotation_map = [[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [1, 1, 0, 1, 1],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0]]
+        
+        self.start = (0,2)
+        self.end = (4,2)
+
+        self.map = Terrain.transpose_arr(self.map)
+        self.rotation_map = Terrain.transpose_arr(self.rotation_map)
 
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)

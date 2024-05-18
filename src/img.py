@@ -15,7 +15,7 @@ class Images:
     def __init__(self):
         self.sprite_broken = pg.image.load("../img/broken.png")
         
-        self.sprite_tiles  = pg.image.load("../img/sand2.png")
+        self.sprite_tiles  = pg.image.load("../img/sand3.png")
         self.sprite_O = Images.get_sprite_at(self.sprite_tiles, 0, 8, 1)
         self.sprite_I = Images.get_sprite_at(self.sprite_tiles, 1, 8, 1)
         self.sprite_L = Images.get_sprite_at(self.sprite_tiles, 2, 8, 1)

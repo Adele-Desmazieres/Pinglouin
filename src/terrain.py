@@ -22,7 +22,6 @@ class Tile:
         self.pathtype = pathtype
         self.connections = [] # list of list of Dirs
         self.img = images.get_tile_img(self.pathtype)
-        # self.img = pg.image.load("sand2.png")
         self.rot = 0 # rotation
         match pathtype:
             case PathType.O:
@@ -78,4 +77,5 @@ class Terrain:
         map = [[X, O, O], 
                [L, I, L], 
                [O, O, X]]
+        map = [[map[j][i] for j in range(len(map[i]))] for i in range(len(map))]
         return Terrain.from_pathtypes(map, images)

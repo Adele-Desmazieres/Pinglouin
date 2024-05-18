@@ -22,7 +22,8 @@ def main():
     is_running = True
 
     while is_running:
-        time_delta = clock.tick(60)/1000.0
+        time_delta = clock.tick(60) / 1000.0
+        
         events = pg.event.get()
         pressed = pg.key.get_pressed()
         
@@ -30,8 +31,8 @@ def main():
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
                 is_running = False
             
-            view.draw(tiles)
-            
+        view.draw(tiles)
+        
     
 
 

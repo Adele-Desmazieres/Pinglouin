@@ -12,10 +12,11 @@ class View:
         plateau = pg.Surface((780, 580))
         tilewidth = 32
         tileheigth = 32
+        tilespace = 1
         for i in range(len(tiles)):
             for j in range(len(tiles[0])):
                 img = tiles[i][j].draw()
-                plateau.blit(img, (i*tilewidth, j*tileheigth, tilewidth, tileheigth))
+                plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
                 
         self.screen.blit(plateau, (10, 10))
         pg.display.flip()

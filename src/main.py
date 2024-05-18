@@ -13,7 +13,6 @@ def is_click_inside_zone(click_pos, zone_rect, scale):
 scale = 5
 
 def main():
-    # print("Hello World")
     pg.init()
     screen = pg.display.set_mode((800, 600))
     pg.display.set_caption("Pinglouin")

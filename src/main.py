@@ -4,6 +4,12 @@ from terrain import *
 from img import *
 # import pygame_gui as pg_gui
 
+def is_click_inside_zone(click_pos, zone_rect, scale):
+        x, y = click_pos
+        rect_x, rect_y, rect_width, rect_height = zone_rect
+        return rect_x <= x <= rect_x + rect_width*scale and rect_y <= y <= rect_y + rect_height*scale
+
+scale = 3
 
 def main():
     print("Hello World")
@@ -30,8 +36,13 @@ def main():
         for event in events:
             if event.type == pg.QUIT or pressed[pg.K_ESCAPE]:
                 is_running = False
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                if is_click_inside_zone(event.pos, (0, 0, 32, 32), scale):
+                    print("Clicked inside the zone!")
+                else:
+                    print("Clicked outside the zone.")
             
-        view.draw(tiles)
+        view.draw(tiles, scale)
         
     
 

@@ -7,7 +7,7 @@ class View:
         self.screen = screen
         self.images = images
     
-    def draw(self, tiles):
+    def draw(self, tiles, scale):
         
         plateau = pg.Surface((780, 580))
         tilewidth = 32
@@ -18,7 +18,10 @@ class View:
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
                 
-        plateau = pg.transform.scale2x(plateau)
+        if scale == 2:
+            plateau = pg.transform.scale2x(plateau)
+        elif scale == 3:
+            plateau = pg.transform.smoothscale_by(plateau,(scale,scale))
         self.screen.blit(plateau, (10, 10))
         pg.display.flip()
         

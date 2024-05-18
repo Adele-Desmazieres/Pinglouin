@@ -91,6 +91,9 @@ class Terrain:
                 tiles[i][j].set_rotation(rotation_tiles[i][j])
         return tiles
     
+    def transpose_arr(map):
+        return [[row[i] for row in map] for i in range(len(map[0]))]
+    
     def test(images):
         O = PathType.O
         I = PathType.I

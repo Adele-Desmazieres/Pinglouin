@@ -1,6 +1,6 @@
 import pygame as pg
 import math
-from direction import PathType
+from pathtype import PathType
 
 class Images:
     # sprite_broken = None

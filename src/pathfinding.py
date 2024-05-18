@@ -86,7 +86,7 @@ def has_shortest_path(tiles, start, end) :
         
         number_loop -= 1
     
-    # print_matrix(path_values)
+    print_matrix(path_values)
     path_found = (path_values[start[0]+1][start[1]+1] != max)
     # print(start[0]+1, start[1]+1)
     # print(path_found)

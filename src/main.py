@@ -64,6 +64,8 @@ def main():
                 haspath = pathfinding.has_shortest_path(tiles, lvl.start, lvl.end)
                 if (haspath):
                     print("PATH FOUND")
+                    view.draw(tiles, scale, pingu, water, True)
+                    pg.time.wait(1300)
                     lvls.next_level()
                     tiles = lvls.get_tiles(images)
                     lvl = lvls.get_curr_level()
@@ -72,7 +74,7 @@ def main():
 
                     
 
-        view.draw(tiles, scale, pingu, water)
+        view.draw(tiles, scale, pingu, water, False)
         
     
 

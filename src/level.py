@@ -19,7 +19,7 @@ class LevelManager:
         self.levels[1].level_2(images)
         self.levels[2].level_3(images)
         self.levels[3].level_4(images)
-        self.curr_level = 1
+        self.curr_level = 0
     
     def next_level(self):
         self.curr_level += 1
@@ -68,7 +68,7 @@ class Level:
     def level_2(self, images):
         self.map = [[X, I, T, I, L],
                     [I, O, I, O, I],
-                    [I, I, I, I, I],
+                    [I, I, I, I, O],
                     [L, I, T, I, X],
                     [O, O, O, O, O]]
         
@@ -87,17 +87,17 @@ class Level:
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
     
     def level_3(self, images):
-        self.map = [[X, L, L, I, L],
-                    [I, I, I, O, I],
-                    [I, I, I, I, I],
-                    [I, L, T, O, X],
-                    [L, O, O, O, O]]
+        self.map = [[X, L, L, I, X],
+                    [I, I, I, L, L],
+                    [I, I, I, I, O],
+                    [I, L, T, L, X],
+                    [L, I, O, O, O]]
         
         self.rotation_map = [[0, 0, 2, 1, 0],
                              [0, 0, 0, 0, 0],
                              [1, 1, 0, 1, 1],
                              [0, 0, 0, 0, 0],
-                             [0, 0, 0, 0, 0]]
+                             [0, 1, 0, 0, 0]]
         
         self.start = (0,0)
         self.end = (4,3)

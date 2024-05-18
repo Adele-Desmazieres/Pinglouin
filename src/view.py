@@ -12,9 +12,15 @@ class View:
     def scale_sprites(self, image, scale):
         return pg.transform.scale_by(image,(scale,scale))
     
-    def draw(self, tiles, scale, pingu, water):        
+    def draw(self, tiles, scale, pingu, water, win=False):        
         plateau = pg.Surface((780, 580))
-        plateau.fill((176, 117, 78))
+        if win: 
+            self.screen.fill((50, 157, 178))
+            plateau.fill((50, 157, 178))
+        else:
+            self.screen.fill((176, 117, 78))
+            plateau.fill((176, 117, 78))
+            
         tilewidth = 32
         tileheigth = 32
         tilespace = 1

@@ -72,7 +72,8 @@ def main():
                 if (haspath):
                     print("PATH FOUND")
                     view.draw(tiles, scale, pingu, water, True)
-                    pg.time.wait(1300)
+
+                    pg.time.wait(2000)
                     victory = lvls.next_level()
                     tiles = lvls.get_tiles(images)
                     lvl = lvls.get_curr_level()

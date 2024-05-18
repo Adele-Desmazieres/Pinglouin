@@ -14,11 +14,12 @@ H = PathType.H
 class LevelManager:
     
     def __init__(self, images):
-        self.levels = [Level(), Level(), Level(), Level()]
+        self.levels = [Level(), Level(), Level(), Level(), Level()]
         self.levels[0].level_1(images)
-        self.levels[1].level_2(images)
-        self.levels[2].level_3(images)
-        self.levels[3].level_4(images)
+        self.levels[1].level_l(images)
+        self.levels[2].level_2(images)
+        self.levels[3].level_3(images)
+        self.levels[4].level_4(images)
         self.curr_level = 0
     
     def next_level(self):
@@ -67,6 +68,27 @@ class Level:
 
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
     
+    def level_l(self, images):
+        self.map = [[O, O, O, O, O],
+                    [O, O, L, L, O],
+                    [X, I, L, I, X],
+                    [O, O, O, L, L],
+                    [O, O, O, O, O]]
+        
+        self.rotation_map = [[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0]]
+        
+        self.start = (0,2)
+        self.end = (4,2)
+
+        self.map = Terrain.transpose_arr(self.map)
+        self.rotation_map = Terrain.transpose_arr(self.rotation_map)
+
+        return Terrain.from_pathtypes(self.map, self.rotation_map, images)
+
     def level_2(self, images):
         self.map = [[X, I, T, I, L],
                     [I, O, I, O, I],
@@ -89,8 +111,8 @@ class Level:
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
     
     def level_3(self, images):
-        self.map = [[X, L, L, I, X],
-                    [I, I, I, L, L],
+        self.map = [[X, L, L, I, L],
+                    [I, I, I, X, L],
                     [I, I, I, I, O],
                     [I, L, T, L, X],
                     [L, I, O, O, O]]
@@ -110,21 +132,29 @@ class Level:
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
     
     def level_4(self, images):
-        self.map = [[O, X, O],
-                    [O, I, O],
-                    [O, X, O]]
+        self.map = [[L, L, L, I, I, L],
+                    [L, L, I, L, I, I],
+                    [L, L, L, I, O, L],
+                    [I, L, O, L, L, L],
+                    [I, O, O, L, L, L],
+                    [X, O, X, L, L, I]]
         
-        self.rotation_map = [[0, 0, 0],
-                             [0, 1, 0],
-                             [0, 0, 0]]
+        self.rotation_map = [[0, 0, 2, 1, 0, 3],
+                             [0, 0, 0, 0, 0, 0],
+                             [1, 1, 0, 1, 1, 1],
+                             [1, 0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0, 0],
+                             [0, 1, 0, 0, 0, 0]]
         
-        self.start = (1,0)
-        self.end = (1,2)
+        self.start = (0,5)
+        self.end = (2,5)
 
         self.map = Terrain.transpose_arr(self.map)
         self.rotation_map = Terrain.transpose_arr(self.rotation_map)
 
         return Terrain.from_pathtypes(self.map, self.rotation_map, images)
+    
+    
     
     def get_pingu(self, images):
         return Pingu(self.start[0], self.start[1], images)

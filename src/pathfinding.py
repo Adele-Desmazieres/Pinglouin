@@ -29,7 +29,9 @@ def check_connections_left_right(tile_left, tile_right):
 def print_matrix(m):
     print("[")
     for i in range(len(m)):
-        print(m[i])
+        for j in range(len(m[i])):
+            print(m[i][j], end=" ")
+        print("")
     print("]")
 
 # returns a boolean, true if a path is found from begin to end
@@ -60,8 +62,8 @@ def has_shortest_path(tiles, start, end) :
     # évaluer les distances
     while path_values[start[0]][start[1]] == max and number_loop > 0:
         
-        for i in range(1, h):
-            for j in range(1, w):
+        for i in range(1, h+1):
+            for j in range(1, w+1):
                 
                 tile = tiles[i-1][j-1]
                 v = path_values[i][j]
@@ -86,7 +88,7 @@ def has_shortest_path(tiles, start, end) :
         
         number_loop -= 1
     
-    print_matrix(path_values)
+    # print_matrix(path_values)
     path_found = (path_values[start[0]+1][start[1]+1] != max)
     # print(start[0]+1, start[1]+1)
     # print(path_found)

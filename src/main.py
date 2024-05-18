@@ -31,6 +31,7 @@ def main():
     # tiles = Terrain.test(images)
     tiles = level.level_1(images)
     pingu = Pingu(level.start[0], level.start[1], images)
+    water = Water(level.end[0], level.end[1], images)
 
     clock = pg.time.Clock()
     is_running = True
@@ -52,7 +53,7 @@ def main():
                         tiles[math.floor(x/32)][math.floor(y/32)].rotate()
                 except Exception:
                     pass
-        view.draw(tiles, scale, pingu)
+        view.draw(tiles, scale, pingu, water)
         
     
 

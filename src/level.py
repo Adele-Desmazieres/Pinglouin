@@ -20,7 +20,7 @@ class Level:
     def level_1(self, images):
         self.map = [[O, O, O, O, O],
                     [O, O, O, O, O],
-                    [I, I, I, I, I],
+                    [I, I, I, I, X],
                     [O, O, O, O, O],
                     [O, O, O, O, O]]
         

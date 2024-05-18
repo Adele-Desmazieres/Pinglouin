@@ -2,6 +2,7 @@
 
 import pygame as pg
 from pingu import Pingu
+from water import Water
 
 class View:
     def __init__(self, screen, images):
@@ -11,7 +12,7 @@ class View:
     def scale_sprites(self, image, scale):
         return pg.transform.scale_by(image,(scale,scale))
     
-    def draw(self, tiles, scale, pingu):        
+    def draw(self, tiles, scale, pingu, water):        
         plateau = pg.Surface((780, 580))
         tilewidth = 32
         tileheigth = 32
@@ -20,10 +21,9 @@ class View:
             for j in range(len(tiles[0])):
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
-                
         
-        # pingu_sprite = self.scale_sprites(pingu.draw(), scale)
-        plateau.blit(pingu.draw(), (pingu.x*32, pingu.y*32))
+        plateau.blit(pingu.draw(), (pingu.x*(32+tilespace), pingu.y*(32+tilespace)-8))
+        plateau.blit(water.img, (water.x*(32+tilespace), water.y*(32+tilespace)))
         
         plateau = self.scale_sprites(plateau, scale)
         self.screen.blit(plateau, (10, 10))

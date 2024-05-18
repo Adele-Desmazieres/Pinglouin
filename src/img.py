@@ -14,15 +14,19 @@ class Images:
 
     def __init__(self):
         self.sprite_broken = pg.image.load("../img/broken.png")
+        self.sprite_tiles  = pg.image.load("../img/sprites.png")
+        columns = 3
         
-        self.sprite_tiles  = pg.image.load("../img/sand3.png")
-        self.sprite_O = Images.get_sprite_at(self.sprite_tiles, 0, 8, 1)
-        self.sprite_I = Images.get_sprite_at(self.sprite_tiles, 1, 8, 1)
-        self.sprite_L = Images.get_sprite_at(self.sprite_tiles, 2, 8, 1)
-        self.sprite_T = Images.get_sprite_at(self.sprite_tiles, 3, 8, 1)
-        self.sprite_X = Images.get_sprite_at(self.sprite_tiles, 4, 8, 1)
-        self.sprite_P = Images.get_sprite_at(self.sprite_tiles, 6, 8, 1)
-        self.sprite_H = Images.get_sprite_at(self.sprite_tiles, 7, 8, 1)
+        self.sprite_O = Images.get_sprite_at(self.sprite_tiles, 0, columns)
+        self.sprite_I = Images.get_sprite_at(self.sprite_tiles, 1, columns)
+        self.sprite_L = Images.get_sprite_at(self.sprite_tiles, 2, columns)
+        self.sprite_T = Images.get_sprite_at(self.sprite_tiles, 3, columns)
+        self.sprite_X = Images.get_sprite_at(self.sprite_tiles, 4, columns)
+        self.sprite_P = Images.get_sprite_at(self.sprite_tiles, 6, columns)
+        self.sprite_H = Images.get_sprite_at(self.sprite_tiles, 7, columns)
+        
+        self.sprite_pingu1 = Images.get_sprite_at(self.sprite_tiles, 8, columns)
+        self.sprite_pingu2 = Images.get_sprite_at(self.sprite_tiles, 9, columns)
     
     def get_tile_img(self, pathtype):
         
@@ -35,7 +39,7 @@ class Images:
             case PathType.P: return self.sprite_P
             case PathType.H: return self.sprite_H
     
-    def get_sprite_at(img, n, columns, lines):
+    def get_sprite_at(img, n, columns):
         sprite_heigth = 32
         sprite_width = 32
         # y = math.floor((sprite_heigth * n) / (columns*sprite_heigth))

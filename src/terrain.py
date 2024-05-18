@@ -59,7 +59,20 @@ class Tile:
                 self.connections[i][j] = Dir.rotate(self.connections[i][j], right)
         angle_deg = math.degrees(Dir.to_angle(self.rot) - math.pi/2) # minus north default orientation
         self.img_rot = Images.rot_center(self.img, angle_deg)
-        
+    
+    def set_rotation(self, rot):
+        if self.rot < rot:
+            i = self.rot
+            fin = rot
+            right = True
+        else:
+            i = rot
+            fin = self.rot
+            right = False
+        while i < fin:
+            self.rotate(right)
+            i += 1
+    
     def draw(self):
         return self.img_rot
 

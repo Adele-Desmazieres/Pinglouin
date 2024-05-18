@@ -28,7 +28,7 @@ class Images:
         self.sprite_pingu1 = Images.get_sprite_at(self.sprite_tiles, 8, columns)
         self.sprite_pingu2 = Images.get_sprite_at(self.sprite_tiles, 9, columns)
 
-        self.sprite_water = Images.get_sprite_at(self.sprite_tiles, 10, columns)
+        self.sprite_water = Images.get_sprite_at(self.sprite_tiles, 11, columns)
     
     def get_tile_img(self, pathtype):
         

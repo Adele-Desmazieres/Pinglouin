@@ -18,6 +18,7 @@ class View:
                 img = tiles[i][j].draw()
                 plateau.blit(img, (i*(tilewidth+tilespace), j*(tileheigth+tilespace), tilewidth, tileheigth))
                 
+        plateau = pg.transform.scale2x(plateau)
         self.screen.blit(plateau, (10, 10))
         pg.display.flip()
         

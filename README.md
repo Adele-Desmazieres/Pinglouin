@@ -16,6 +16,8 @@ Télécharger le code. Avoir Python3 installé avec les modules suivants : pygam
 
 ## Lancement
 
+Dans le dossier ./src :
+
 ```sh
 python3 main.py
 ```
